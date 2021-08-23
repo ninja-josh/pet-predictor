@@ -1,5 +1,5 @@
 # streamlit-image-classifier-demo
-A demonstration deployment using streamlit
+## A demonstration deployment using streamlit
 
 Here is template prediction website ready to deploy to heroku.  When deployed, this website allows users to upload an image of an cat or a dog and returns the model's prediction of which it is.
 
@@ -13,7 +13,9 @@ Notice that the model class loads a model from saved weights.  You will not want
 
 3. requirements.txt tells the web server which Python to install in order to run your code.  The server will install those packages and all dependencies.  It's necessary to specify the versions.
 
-4. app.py is the program that creates the streamlit server and controls the layout and backend code for the website.  It's called app.py because that's what Procfile tells Heroku to run.  It could be called anything as long as the .py file and the Procfile match.
+4. You should create a new environment for your Streamlit app.  This will make keeping track of and exporting requirements much easier.
+
+5. app.py is the program that creates the streamlit server and controls the layout and backend code for the website.  It's called app.py because that's what Procfile tells Heroku to run.  It could be called anything as long as the .py file and the Procfile match.
 
 ## The Streamlit app in app.py
 
