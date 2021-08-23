@@ -34,9 +34,9 @@ class ResnetModel():
         model.add(dense_2)
         model.add(dense_3)
         
-        dense_1_weights = pickle.load(open('dense_1_weights.pkl', 'rb'))
-        dense_2_weights = pickle.load(open('dense_2_weights.pkl', 'rb'))
-        dense_3_weights = pickle.load(open('dense_3_weights.pkl', 'rb'))
+        dense_1_weights = pickle.load(open('weights/dense_1_weights.pkl', 'rb'))
+        dense_2_weights = pickle.load(open('weights/dense_2_weights.pkl', 'rb'))
+        dense_3_weights = pickle.load(open('weights/dense_3_weights.pkl', 'rb'))
 
         dense_1.set_weights(dense_1_weights)
         dense_2.set_weights(dense_2_weights)
