@@ -1,6 +1,8 @@
 # streamlit-image-classifier-demo
 ## A demonstration deployment using streamlit
 
+Here's what this repo creates when deployed: [pet-predictor.herokuapp.com](https://pet-predictor.herokuapp.com)
+
 Here is template prediction website ready to deploy to heroku.  When deployed, this website allows users to upload an image of an cat or a dog and returns the model's prediction of which it is.
 
 The src.py contains the class that does all of the modeling work.  In order to replace it with your own model, that's where you would start making changes.
