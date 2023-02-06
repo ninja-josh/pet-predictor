@@ -4,7 +4,7 @@ from lime import lime_image
 from skimage.segmentation import mark_boundaries
 import matplotlib.pyplot as plt
 from PIL import Image
-from src import *
+from src import ResnetModel
 
 #Create the model
 model = ResnetModel()
@@ -26,15 +26,5 @@ if image:
 
 if image:
     st.header('I think this because I see...\nGreen gives me confidence, red gives me doubt')
-    conv_image = model.convert_image(image)
-    explainer = lime_image.LimeImageExplainer()
-    exp = explainer.explain_instance(conv_image[0],
-                                model.model.predict,)
-    
-    image, mask = exp.get_image_and_mask(0,
-                                     positive_only=False, 
-                                     negative_only=False,
-                                     hide_rest=False,
-                                     min_weight=.05
-                                    )
-    st.image(mark_boundaries(image, mask), use_column_width='always')
+
+    st.image(model.explain_prediction(), use_column_width='always')
