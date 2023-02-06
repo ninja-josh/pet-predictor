@@ -8,6 +8,8 @@ import numpy as np
 import base64
 from io import BytesIO
 import re
+from lime import lime_image
+from skimage.segmentation import mark_boundaries
 
 class ResnetModel():
     #
@@ -54,14 +56,15 @@ class ResnetModel():
         img = np.asarray(img)
         img = img.reshape((1,100,100,3))
         img = img / 255
+        self.img = img
         
         return img
         
     def predict_pet(self, image):
         """Return a prediction, dog or cat, and confidence for a passed image file"""
         
-        img = self.convert_image(image)
-        proba = self.model.predict(img)[0][0]
+        self.convert_image(image)
+        proba = self.model.predict(self.img)[0][0]
         
         if proba >= .6:
             certainty = int(proba * 100)
@@ -71,3 +74,19 @@ class ResnetModel():
             return f"I am {certainty}% certain this is a cat"
         else:
             return f"I don't have a clue what this is.  Would you like to try a different image?"
+    
+    def explain_prediction(self):
+        try:
+
+            explainer = lime_image.LimeImageExplainer()
+            exp = explainer.explain_instance(self.img[0],
+                                        self.model.predict)
+            image, mask = exp.get_image_and_mask(0,
+                                             positive_only=False, 
+                                             negative_only=False,
+                                             hide_rest=False,
+                                             min_weight=0.1
+                                            )
+            return mark_boundaries(image, mask)
+        except AttributeError:
+            print("Model not fit yet.  Please make a prediction")
