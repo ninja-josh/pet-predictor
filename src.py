@@ -76,6 +76,7 @@ class ResnetModel():
             return f"I don't have a clue what this is.  Would you like to try a different image?"
     
     def explain_prediction(self):
+        """Return an explainer image to describe how the model is making the prediction"""
         try:
 
             explainer = lime_image.LimeImageExplainer()
